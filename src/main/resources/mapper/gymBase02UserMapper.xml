@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bc.wb.gym.base.dao.GymBase02UserMapper">
+    <insert id="addUser">
+        insert into gym_base_02store_user (store_id, user_id, user_role, create_time) value (#{arg0}, #{arg1}, #{arg2}, #{arg3})
+    </insert>
+    <update id="addOneMemberCount">
+        update gym_base_01store_infor set member_count=member_count+1 where store_id = #{arg0}
+    </update>
+    <update id="addOneCoachCount">
+        update gym_base_01store_infor set coach_count=coach_count+1 where store_id = #{arg0}
+    </update>
+    <update id="deleteUser">
+        update gym_base_02store_user set remove_time = #{arg3} where store_id = #{arg0} and user_id = #{arg1} and user_role = #{arg2}
+    </update>
+    <insert id="addUserLose">
+        insert into gym_base_03store_user_lose (store_id, user_id, user_role, create_time) value (#{arg0}, #{arg1}, #{arg2}, #{arg3})
+    </insert>
+    <update id="reduceOneMemberCount">
+        update gym_base_01store_infor set member_count = member_count-1 where store_id = #{arg0}
+    </update>
+    <update id="reduceOneCoachCount">
+        update gym_base_01store_infor set coach_count = coach_count-1 where store_id = #{arg0}
+    </update>
+    <select id="loadStoreUsers" resultType="com.bc.wb.gym.base.dataBean.BeanStoreUser">
+        select * from gym_base_02store_user where store_id = #{arg0} and user_id = #{arg1} and user_role = #{arg2} and remove_time is NULL
+    </select>
+    <insert id="addStoreCoachMember">
+        insert into gym_base_04store_coach_member (store_id, coach_id, member_id, create_time) value(#{arg0}, #{arg1}, #{arg2}, #{arg3})
+    </insert>
+    <update id="deleteStoreCoachMember">
+        update gym_base_04store_coach_member set remove_time = #{arg3} where store_id = #{arg0} and coach_id = #{arg1} and member_id = #{arg2}
+    </update>
+    <select id="searchStoreCoachMember" resultType="com.bc.wb.gym.base.dataBean.BeanStoreCoachMember">
+        select * from gym_base_04store_coach_member where store_id = #{arg0} and coach_id = #{arg1} and member_id = #{arg2} and remove_time is NULL
+    </select>
+    <insert id="addUserInfo">
+        insert into gym_base_11_user_infor (user_name, mobile, sex) value (#{arg0}, #{arg1}, #{arg2})
+    </insert>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bc.wb.gym.base.dao.GymBase01StoreMapper">
+    <insert id="addStore">
+        INSERT INTO gym_base_01store_infor (store_name, address, dz_url) value (#{arg0}, #{arg1}, #{arg2})
+    </insert>
+    <delete id="deleteStore">
+        delete from gym_base_01store_infor where store_name = #{arg0}
+    </delete>
+    <update id="modifyStoreName">
+        update gym_base_01store_infor set store_name = #{arg0} where store_id = #{arg1}
+    </update>
+    <update id="modifyStoreAddress">
+        update gym_base_01store_infor set address = #{arg0} where store_id = #{arg1}
+    </update>
+    <update id="modifyStoreOwnerId">
+        update gym_base_01store_infor set store_owner_id = #{arg0} where store_id = #{arg1}
+    </update>
+    <update id="modifyStoreDzUrl">
+        update gym_base_01store_infor set dz_url = #{arg0} where store_id = #{arg1}
+    </update>
+    <select id="loadStoresByStoreName" resultType="com.bc.wb.gym.base.dataBean.BeanStore">
+        select * from gym_base_01store_infor where store_name = #{arg0}
+    </select>
+</mapper>
